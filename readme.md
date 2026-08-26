@@ -1,0 +1,2 @@
+# Sistema de reservas
+Es una solución tecnológica diseñada para gestionar, automatizar y centralizar la programación de citas, alquileres, espacios o servicios entre los usuarios y un negocio. Su objetivo principal es optimizar la disponibilidad de recursos y simplificar la experiencia tanto para los clientes como para los administradores.

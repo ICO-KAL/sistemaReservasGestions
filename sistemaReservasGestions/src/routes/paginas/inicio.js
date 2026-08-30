@@ -1,16 +1,20 @@
-const {Router}= require('express');
+const express = require('express');
+const {Router} = require('express');
 const path = require('path');
-const fs = require('fs');
 
-const app = Router();
-const buscar = path.join(__dirname,'ruta archivos');
-const leer = fs.readFile(buscar,'utf-8',(error,data) =>{
-    if(error){return console.log('hubo un error en el proyecto',error)}
-    console.log(data);
-});
 
-app.get('/',(req,res)=>{
+const router = Router();
+const app = express();
+const buscar = path.join(__dirname,'frontend');
+
+// configuracion
+app.set('frontend',buscar);
+
+//middleware
+app.use(express.static(app.get('fronted')))
+
+router.get('/',(req,res)=>{
     
 })
 
-export default app;
+export default router;

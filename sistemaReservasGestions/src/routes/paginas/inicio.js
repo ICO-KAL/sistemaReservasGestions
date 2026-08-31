@@ -5,10 +5,9 @@ const path = require('path');
 
 const router = Router();
 const app = express();
-const buscar = path.join(__dirname,'frontend');
 
 // configuracion
-app.set('frontend',buscar);
+app.set('frontend',path.join(__dirname,'frontend'));
 
 //middleware
 app.use(express.static(app.get('fronted')))

@@ -1,13 +1,13 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import dashoard from '../../frontend/dashoard.jsx';
 
 const app = express();
-const dashoard = require('../../frontend/dashoard')
 
 // configuracion
-app.set('fronted',path.join(__dirname,'fronted'))
+app.set('frontend', path.join(import.meta.dirname, 'frontend'));
 
-//middleware
-app.use(dashoard)
+// middleware
+app.use(dashoard);
 
 // rutas funcionalidad de validacion 

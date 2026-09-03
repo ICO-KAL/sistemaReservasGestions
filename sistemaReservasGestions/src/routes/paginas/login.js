@@ -1,12 +1,11 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import login from '../../frontend/login.jsx';
 
-const app =express();
-const login = require('../../frontend/login')
+const app = express();
 
 // configuracion
-app.set('frontend', path.join(__dirname,'frontend'));
+app.set('frontend', path.join(import.meta.dirname, 'frontend'));
 
 // middleware
-
 app.use(login);

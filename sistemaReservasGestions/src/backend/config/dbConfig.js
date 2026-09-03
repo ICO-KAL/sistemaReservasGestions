@@ -8,7 +8,7 @@ dotenv.config({ path: path.resolve(import.meta.dirname, '../../reservas.env') })
 const url = `mongodb+srv://${process.env.userBD}:${process.env.passwoard}@${process.env.clientBD}/?appName=practicas`;
 const client = new MongoClient(url);
 
-async function connectToDatabase() {
+export default async function connectToDatabase() {
     try {
         await client.connect();
         const db = client.db('practicaMongo');
@@ -22,4 +22,3 @@ async function connectToDatabase() {
 }
 connectToDatabase();
 
-export default connectToDatabase;

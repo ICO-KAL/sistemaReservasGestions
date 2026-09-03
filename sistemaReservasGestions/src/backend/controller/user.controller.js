@@ -1,5 +1,4 @@
 const connectToDatabase = require('../config/dbConfig');
-const userBD = new connectToDatabase();
 
 class user{
     constructor(){
@@ -36,7 +35,7 @@ class user{
            res.status(202).send('ver por id el primer usuario')
         }
         catch(e){
-            c
+            console.log('error por esto',e)
         }
     }
     async detele(req,res){

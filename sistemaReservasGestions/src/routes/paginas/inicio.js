@@ -1,16 +1,17 @@
-const {Router}= require('express');
-const path = require('path');
-const fs = require('fs');
+import express, { Router } from 'express';
+import path from 'path';
 
-const app = Router();
-const buscar = path.join(__dirname,'ruta archivos');
-const leer = fs.readFile(buscar,'utf-8',(error,data) =>{
-    if(error){return console.log('hubo un error en el proyecto',error)}
-    console.log(data);
+const router = Router();
+const app = express();
+
+// configuracion
+app.set('frontend', path.join(import.meta.dirname, 'frontend'));
+
+// middleware
+app.use(express.static(app.get('frontend')));
+
+router.get('/', (req, res) => {
+    
 });
 
-app.get('/',(req,res)=>{
-    
-})
-
-export default app;
+export default router;

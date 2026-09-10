@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import React, { useState } from "react";
 const mongo = require('../backend/reservasGestionsBD');
 
-function login(){
+export default function login(){
      const [contraseña, setContraseña] = useState('');
      const coneection = mongo();
      // function de contrase;a
@@ -20,5 +20,3 @@ function login(){
      );
     
 }
-
-export default login;

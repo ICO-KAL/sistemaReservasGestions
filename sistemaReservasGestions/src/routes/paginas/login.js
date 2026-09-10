@@ -1,11 +1,29 @@
 import express from 'express';
 import path from 'path';
-import login from '../../frontend/login.jsx';
+import userModels from '../../backend/models/userModels';
 
-const app = express();
+const router = express();
 
 // configuracion
-app.set('frontend', path.join(import.meta.dirname, 'frontend'));
+router.set('frontend', path.join(import.meta.dirname, 'frontend'));
 
 // middleware
-app.use(login);
+router.use(login);
+
+// rutas
+
+export default new router.post('/:id', async(req,res) =>{
+     try{ 
+        const [name,passwoard] = req.body;
+
+
+
+        res.status(200).json({
+            message: "usuario accedio correctamente",
+        })
+     }
+     catch(e){
+        console.log(e);
+     }
+});
+

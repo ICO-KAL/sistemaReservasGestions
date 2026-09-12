@@ -10,7 +10,7 @@ export default new class conection{
        try{
           dotenv.config({ path: path.resolve(import.meta.dirname, '../../reservas.env') });
           this.url = `mongodb+srv://${process.env.userBD}:${process.env.passwoard}@${process.env.clientBD}/?appName=practicas`;
-          this.conection = await mongoose.Connection(this.url);   
+          this.conection = await mongoose.connect(this.url);   
           console.log('base de datos conectadda'); 
        } catch(e){
           console.log(e);

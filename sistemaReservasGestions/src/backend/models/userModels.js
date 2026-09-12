@@ -13,7 +13,10 @@ export default new class userModels{
     async getAllUser(){ //getAll
         return await userSchemes.find();
     }
-    async getUser(id){
+    async getUserOne(filter){
+        return await userSchemes.findOne(filter);
+    }
+    async getUserById(id){
         return await userSchemes.findById({_id: new mongoose.Types.ObjectId(id)});
     }
     async  upDateUser(id,user){

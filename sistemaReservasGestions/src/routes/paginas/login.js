@@ -1,29 +1,11 @@
 import express from 'express';
-import path from 'path';
-import userModels from '../../backend/models/userModels';
+import userController from '../../backend/controller/user.controller';
 
-const router = express();
-
-// configuracion
-router.set('frontend', path.join(import.meta.dirname, 'frontend'));
+const router = express.Router();
 
 // middleware
-router.use(login);
+router.post('/register',userController.register());
+router.post('/login',userController.login());
 
 // rutas
-
-export default new router.post('/:id', async(req,res) =>{
-     try{ 
-        const [name,passwoard] = req.body;
-
-
-
-        res.status(200).json({
-            message: "usuario accedio correctamente",
-        })
-     }
-     catch(e){
-        console.log(e);
-     }
-});
 

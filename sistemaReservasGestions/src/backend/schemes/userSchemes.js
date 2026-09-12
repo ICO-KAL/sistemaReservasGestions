@@ -8,12 +8,6 @@ const userSchemes = new mongoose.Schema({
         trim: true,
         maxlength: [50, 'El nombre no puede exceder los 50 caracteres']
     },
-    lastname: {
-        type: String,
-        required: [true, 'El apellido es obligatorio'],
-        trim: true,
-        maxlength: [50, 'El apellido no puede exceder los 50 caracteres']
-    },
     email: {
         type: String,
         required: [true, 'El correo electrónico es obligatorio'],
@@ -25,7 +19,14 @@ const userSchemes = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'La contraseña es obligatoria'],
-        minlength: [6, 'La contraseña debe tener al menos 6 caracteres']
+        minlength: [8, 'La contraseña debe tener al menos 8 caracteres']
+    },
+    phone: {
+        type: String,
+        required: [false, 'El teléfono es opcional'], // Cambia a true si es obligatorio
+        trim: true,
+        // Expresión regular básica para validar números telefónicos (permite +, espacios, guiones y números)
+        match: [/^[0-9\+\-\s\(\)]*$/, 'Por favor ingrese un número de teléfono válido']
     },
     role: {
         type: String,

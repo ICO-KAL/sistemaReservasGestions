@@ -1,20 +1,17 @@
-const express = require('express');
-const {Router} = require('express');
-const path = require('path');
-
+import express, { Router } from 'express';
+import path from 'path';
 
 const router = Router();
 const app = express();
-const buscar = path.join(__dirname,'frontend');
 
 // configuracion
-app.set('frontend',buscar);
+app.set('frontend', path.join(import.meta.dirname, 'frontend'));
 
-//middleware
-app.use(express.static(app.get('fronted')))
+// middleware
+app.use(express.static(app.get('frontend')));
 
-router.get('/',(req,res)=>{
+router.get('/', (req, res) => {
     
-})
+});
 
 export default router;

@@ -1,25 +1,30 @@
 import dotenv from 'dotenv';
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
 import path from 'path';
 
-// Carga las variables desde src/reservas.env usando una ruta absoluta
-dotenv.config({ path: path.resolve(import.meta.dirname, '../../reservas.env') });
-
-const url = `mongodb+srv://${process.env.userBD}:${process.env.passwoard}@${process.env.clientBD}/?appName=practicas`;
-const client = new MongoClient(url);
-
-async function connectToDatabase() {
-    try {
-        await client.connect();
-        const db = client.db('practicaMongo');
-        console.log('Connected to database successfully');
-        return db;
-    } catch (e) {
-        console.error('Error connecting to database', e); 
-    } finally {
-        await client.close();
+export default new class conection{
+    constructor(){
+      this.reservasConection();
+    }
+    async reservasConection(){
+       try{
+          dotenv.config({ path: path.resolve(import.meta.dirname, '../../reservas.env') });
+          this.url = `mongodb+srv://${process.env.userBD}:${process.env.passwoard}@${process.env.clientBD}/?appName=practicas`;
+          this.conection = await mongoose.connect(this.url);   
+          console.log('base de datos conectadda'); 
+       } catch(e){
+          console.log(e);
+       }
+    }
+    async reservasExit(){
+        try{
+           this.disconnect = await mongoose.disconnect();
+           console.log('base de datos desconectada');
+           return this.disconnect;
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 }
-connectToDatabase();
 
-export default connectToDatabase;

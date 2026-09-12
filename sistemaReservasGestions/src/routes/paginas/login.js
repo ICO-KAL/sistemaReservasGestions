@@ -1,11 +1,11 @@
 import express from 'express';
-import path from 'path';
-import login from '../../frontend/login.jsx';
+import userController from '../../backend/controller/user.controller';
 
-const app = express();
-
-// configuracion
-app.set('frontend', path.join(import.meta.dirname, 'frontend'));
+const router = express.Router();
 
 // middleware
-app.use(login);
+router.post('/register',userController.register());
+router.post('/login',userController.login());
+
+// rutas
+

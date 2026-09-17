@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+//import 'dotenv/config';
 import mongoose from 'mongoose';
 import path from 'path';
 
@@ -8,7 +9,7 @@ export default new class conection{
     }
     async reservasConection(){
        try{
-          dotenv.config({ path: path.resolve(import.meta.dirname, '../../reservas.env') });
+          dotenv.config({ path: path.resolve(import.meta.dirname, '../../.env') });
           this.url = `mongodb+srv://${process.env.userBD}:${process.env.passwoard}@${process.env.clientBD}/?appName=practicas`;
           this.conection = await mongoose.connect(this.url);   
           console.log('base de datos conectadda'); 

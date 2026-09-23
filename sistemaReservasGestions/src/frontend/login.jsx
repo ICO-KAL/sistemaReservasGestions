@@ -1,14 +1,10 @@
 import { MongoClient } from "mongodb";
 import React, { useState } from "react";
-const mongo = require('../backend/reservasGestionsBD');
+import userController from '../backend/controller/user.controller';
 
-function login(){
-     const [contraseña, setContraseña] = useState('');
-     const coneection = mongo();
-     // function de contrase;a
-     const handleChange = (event) => {
-         setContraseña(event.target.value);
-     };
+export default function login(){
+     const {email, setEmail} = useState();
+     const {passwoard, setPasswoard} = useState();
      return (
          <div>
              <input 
@@ -20,5 +16,3 @@ function login(){
      );
     
 }
-
-export default login;

@@ -1,10 +1,9 @@
 import userModels from '../models/userModels';
+import autentic from '../helpers/autentic';
 import bcrypt from 'bcryptjs';
 
-export default  new class user{
-    constructor(){
-
-    }
+export default new class user{
+    constructor(){}
     
     // crud
     async register(req,res){
@@ -21,7 +20,10 @@ export default  new class user{
              passwoard: encrydataPasswoard,
            });
 
-           res.status(202).send('crear el primer usuario',registerCreate)
+           res.status(202).json({
+            message: "usuario creado",
+            registerCreate
+           })
         }
         catch(e){
             console.log(e);
@@ -35,14 +37,19 @@ export default  new class user{
             if(!readUser) res.status(400).json({Error: "usuario incorrecto"}); // si no encontro el usuario
   
             const userCompare = await bcrypt.compare(passwoard,readUser.passwoard);// validacion de si el usuario puso bien el passwoard
-            res.status(202).send('login correcto', userCompare);
+            const token = await autentic(email);
+            res.status(202).json({
+                message: "Login correcto",
+                userCompare,
+                token
+            });
         }
         catch(e){
             console.log(e)
         }
     }
 
-    async upDate(req,res){
+    async upDateUser(req,res){
          try{
            res.status(202).send('ver por id el primer usuario')
         }
@@ -50,8 +57,14 @@ export default  new class user{
             console.log('error por esto',e)
         }
     }
-    async detele(req,res){
+    async deteleUser(req,res){
          try{
+           const {email} = req.body;
+           const readUser = userModels.getUserOne({email});
+           if(!readUser) return res.status(400).json({message: "usuario no encontrado"});
+           
+           const eliminar = userModels.deleteUser({email});
+
            res.status(202).send('ver por id el primer usuario')
         }
         catch(e){

@@ -1,17 +1,12 @@
-import express, { Router } from 'express';
-import path from 'path';
+import { Router } from 'express';
+import { verificToken } from '../../backend/helpers/autentic.js';
 
 const router = Router();
-const app = express();
 
 // configuracion
-app.set('frontend', path.join(import.meta.dirname, 'frontend'));
 
 // middleware
-app.use(express.static(app.get('frontend')));
-
-router.get('/', (req, res) => {
-    
-});
+router.get('/incio'); // dashoard 
+router.get('/'); // anuncios
 
 export default router;

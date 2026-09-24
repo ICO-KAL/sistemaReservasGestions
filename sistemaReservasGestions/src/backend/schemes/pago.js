@@ -31,3 +31,5 @@ const pagoSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+export default mongoose.model('pagoSchema',pagoSchema);

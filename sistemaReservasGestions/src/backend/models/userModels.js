@@ -7,9 +7,6 @@ import userSchemes from '../schemes/userSchemes';
    const deleteUser = async (id)=>{
         return await userSchemes.deleteOne({_id: new mongoose.Types.ObjectId(id)});
     }
-   const getAllUser = async ()=>{ //getAll
-        return await userSchemes.find();
-    }
     const getUserOne = async (filter) =>{ // monstrar el usuario ingresado 
         return await userSchemes.findOne(filter);
     }
@@ -20,4 +17,4 @@ import userSchemes from '../schemes/userSchemes';
         return await userSchemes.updateOne({_id: new mongoose.Types.ObjectId(id)},user,{new: true});
     }
 
-export default {createUser,deleteUser,getAllUser,getUserById,getUserOne};
+export default {createUser,deleteUser,getAllUser,getUserById,getUserOne,upDateUser};

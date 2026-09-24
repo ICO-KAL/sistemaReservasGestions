@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const recursos = new mongoose.Schema({
+const recursosSchemes = new mongoose.Schema({
     nombre: {
         type: String,
         required: true
@@ -24,3 +24,5 @@ const recursos = new mongoose.Schema({
 },{
     timestamps:true
 });
+
+export default mongoose.model('recursos',recursosSchemes);

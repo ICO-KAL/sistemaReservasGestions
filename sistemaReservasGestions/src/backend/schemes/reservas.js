@@ -44,3 +44,5 @@ const reservasSchemes = new mongoose.Schema({
 },{
     timestamps: true
 })
+
+export default mongoose.model('reservasSchemes',reservasSchemes);

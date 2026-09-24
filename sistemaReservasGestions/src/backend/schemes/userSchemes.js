@@ -2,7 +2,7 @@ import dbClient from '../config/dbConfig.js';
 import mongoose, { mongo } from 'mongoose';
 
 const userSchemes = new mongoose.Schema({
-    name: {
+    usuario: {
         type: String,
         required: [true, 'El nombre es obligatorio'],
         trim: true,

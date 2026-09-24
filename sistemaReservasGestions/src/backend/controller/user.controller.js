@@ -15,7 +15,7 @@ export default new class user{
 
            const encrydataPasswoard = await bcrypt.hash(passwoard,20); // encryta el passwoard hasta cierta longitud
            const registerCreate = await userModels.createUser({ 
-             name,
+             usuario: name,
              email,
              passwoard: encrydataPasswoard,
            });
@@ -51,24 +51,40 @@ export default new class user{
 
     async upDateUser(req,res){
          try{
-           res.status(202).send('ver por id el primer usuario')
+           const {name,email,passwoard} = req.body;
+           const readUser = await userModels.getUserOne({email});
+
+           if(!readUser) return res.status(401).json({Error: "usuario no existe"});
+            
+           const encrydataPasswoard = await bcrypt.hash(passwoard,20);
+           const updateUser = await userModels.upDateUser({
+            usuario: name,
+            email,
+            passwoard: encrydataPasswoard
+           })
+           res.status(202).json({message: "usuario actualizado"},updateUser);
         }
         catch(e){
-            console.log('error por esto',e)
+            console.log('Error al actualizar el usuario: ',e);
+            return res.status(500).json({message: "Error interno del servidor", error: e.message});
         }
     }
     async deteleUser(req,res){
          try{
            const {email} = req.body;
-           const readUser = userModels.getUserOne({email});
-           if(!readUser) return res.status(400).json({message: "usuario no encontrado"});
+           const readUser = await userModels.getUserOne({email});
+           if(!readUser) return res.status(404).json({message: "usuario no encontrado"});
            
-           const eliminar = userModels.deleteUser({email});
+           const eliminar = await userModels.deleteUser({email});
 
-           res.status(202).send('ver por id el primer usuario')
+           res.status(202).json({
+                message: "Usuario Eliminado",
+                data: eliminar
+            });
         }
         catch(e){
-            console.log('error: ', e);
+           console.error('Error al eliminar usuario: ', e);
+           return res.status(500).json({ message: "Error interno del servidor", error: e.message });
         }
     }
 }

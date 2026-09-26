@@ -1,5 +1,5 @@
 import userModels from '../models/userModels';
-import autentic from '../helpers/autentic';
+import { autentic } from '../helpers/autentic';
 import bcrypt from 'bcryptjs';
 
 export default new class user{

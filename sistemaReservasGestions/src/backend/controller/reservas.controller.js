@@ -2,6 +2,7 @@ import reservasModels from "../models/reservasModels";
 import userModels from "../models/userModels";
 
 export default new class reservas{
+
    async crearReservas(req,res){
       try{
          const {usuario,fecha,recurso,horaInicio,horaFinal,cantidadPersonas} = req.body;
@@ -54,9 +55,41 @@ export default new class reservas{
       }
    }
    async ActualizarReservas(req,res){
+      try{
+         const {usuario,fecha,horaInicio,horaFinal,cantidadPersonas} = req.body;
+         const read = await reservasModels.getOneReservas({usuario});
+         if(!read) return res.status(404).json({Error: "no se encontro el usuario"});
 
+         const Actualizar = await reservasModels.updateReservas({
+            usuario,
+            fecha,
+            horaInicio,
+            horaFinal,
+            cantidadPersonas
+         });
+ 
+         res.status(202).json({message: "Actualizacion correctamente", Actualizar});
+      }catch(e){
+         console.log('Error al actualizar el producto',e);
+         return res.status(404).json({message: "un error al actualizar una reserva", Error: e})
+      }
    }
    async AllReservas(req,res){
-    
+     try{
+         const {usuario,fecha,horaInicio,horaFinal,cantidadPersonas} = req.body;
+         const read = await reservasModels.getOneReservas({usuario, fecha});
+         if(!read) return res.status(404).json({Error: "no se encontro el usuario"});
+
+         const todasReservas = await reservasModels.getAllReservas({
+            usuario,
+            fecha,
+            horaInicio,
+            horaFinal,
+            cantidadPersonas
+         })
+     }catch(e){
+         console.log('Error al mirar todos las reservas',e);
+         return res.status(404).json({message: "Error al mirar todas las reservas",Error: e});
+     }
    }
 }

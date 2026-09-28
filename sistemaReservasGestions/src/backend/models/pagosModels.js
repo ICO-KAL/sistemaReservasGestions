@@ -1,16 +1,28 @@
 import mongoose from "mongoose";
 import pago from "../schemes/pago";
 
-const getPago = async ()=>{
-    return await pago.findOne();
+const createPago = async (data) =>{
+    return await pago.create(data);
 }
 
-const upDatePago = async () =>{
-    return await pago.updateOne();
+const getPago = async (filter = {}) =>{
+    return await pago.findOne(filter);
 }
 
-const getByIdPago = async (id,Pago) =>{
-    return await pago.findById({_id: new mongoose.Types.ObjectId(id)},Pago,{new: true});
+const getAllPagos = async (filter = {}) =>{
+    return await pago.find(filter);
 }
 
-export default {getPago,upDatePago,getByIdPago}
+const getByIdPago = async (id) =>{
+    return await pago.findById(new mongoose.Types.ObjectId(id));
+}
+
+const updatePago = async (id, data) =>{
+    return await pago.findByIdAndUpdate(new mongoose.Types.ObjectId(id), data, {new: true, runValidators: true});
+}
+
+const deletePago = async (id) =>{
+    return await pago.findByIdAndDelete(new mongoose.Types.ObjectId(id));
+}
+
+export default {createPago,getPago,getAllPagos,getByIdPago,updatePago,deletePago}

@@ -14,6 +14,10 @@ const updateRecursos = async (id,name) => {
     return await recursos.findByIdAndUpdate({_id: new mongoose.Types.ObjectId(id)},name,{new:true});
 }
 
+const getOneRecursos = async () => {
+    return await recursos.findOne();
+} 
+
 const deleteRecursos = async (id) => {
     return await recursos.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)});
 }
@@ -22,4 +26,4 @@ const getAllRecursos = async (filter) =>{
     return await recursos.find(filter);
 }
 
-export default {createRecursos,getRecursos,updateRecursos,getAllRecursos,deleteRecursos}
+export default {createRecursos,getRecursos,updateRecursos,getAllRecursos,deleteRecursos,getOneRecursos}

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import reservas from '../schemes/reservas';
 
-const getAllReservas = async () =>{
-    return await reservas.find();
+const getAllReservas = async (filter) =>{
+    return await reservas.find(filter);
 }
 
 const getOneReservas = async(filter) =>{

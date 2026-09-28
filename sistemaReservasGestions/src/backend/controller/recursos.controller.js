@@ -4,8 +4,8 @@ export default new class recursoController{
     async crearRecursos(req,res){
        try{
            const {nombre,descripcion,capacidad,precio,estado} = req.body;
-            const read = await recursosModels.getOneRecursos({nombre});
-            if(!read) return res.status(404).json({message: "no se encontro el recurso"});
+           const read = await recursosModels.getOneRecursos({nombre});
+            if(read) return res.status(404).json({message: "Tienes un recurso en tu reservas"});
 
             const crearRecursos = await recursosModels.createRecursos({
                 nombre,

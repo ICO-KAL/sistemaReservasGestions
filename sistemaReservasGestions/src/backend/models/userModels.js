@@ -10,6 +10,9 @@ import userSchemes from '../schemes/userSchemes';
     const getUserOne = async (filter) =>{ // monstrar el usuario ingresado 
         return await userSchemes.findOne(filter);
     }
+    const getAllUser = async () =>{
+        return await userSchemes.find();
+    }
     const getUserById = async (id) =>{ // leer a 1 por su id
         return await userSchemes.findById({_id: new mongoose.Types.ObjectId(id)});
     }

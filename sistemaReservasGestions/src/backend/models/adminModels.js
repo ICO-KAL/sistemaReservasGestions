@@ -1,20 +1,20 @@
-import mongoose, { get } from "mongoose";
+import mongoose from "mongoose";
 import admin from "../schemes/admin";
 
-const createAdmin = async () =>{
-    return await admin.create();
+const createAdmin = async (data) =>{
+    return await admin.create(data);
 }
 
 const deleteAdmin = async(id) =>{
-    return await admin.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id)});
+    return await admin.findByIdAndDelete(new mongoose.Types.ObjectId(id));
 }
 
 const updateAdmin = async(id,name) =>{
-    return await admin.findByIdAndUpdate({_id: new mongoose.Types.ObjectId(id)},name,{new:true});
+    return await admin.findByIdAndUpdate(new mongoose.Types.ObjectId(id),name,{new:true, runValidators:true});
 }
 
 const getAdmin = async(id) => {
-    return await admin.findById({_id: new mongoose.Types.ObjectId(id)});
+    return await admin.findById(new mongoose.Types.ObjectId(id));
 }
 
 const getAllAdmin = async() => {

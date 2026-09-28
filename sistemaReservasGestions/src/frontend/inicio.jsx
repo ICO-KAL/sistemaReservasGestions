@@ -1,6 +1,6 @@
 import React, { useEffectEvent } from "react";
 
-function inicio(){
+export default function inicio(){
     const [publicidad, setPublicidad] = useEffectEvent(0);
     publicidad((p)=>{
       // contenido de la publicidad
@@ -18,5 +18,3 @@ function inicio(){
        </>
     )
 }
-
-export default inicio

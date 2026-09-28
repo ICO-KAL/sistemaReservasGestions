@@ -1,22 +1,16 @@
 import express from 'express';
 import inicio from './paginas/inicio.js';
-import path from 'path';
-import dotenv from 'dotenv';
-import {fileURLToPath} from 'node:url';
+import dotenv from 'dotenv/config';
 import dbConfig from '../backend/config/dbConfig.js';
+import login from './paginas/login.js';
 
 const app = express();
 
-// configuraciones
-app.set('pagina web', inicio);
-
 // middleware
 app.use(inicio);
+app.use(login);
 
 try{
-    const _filename = fileURLToPath(import.meta.url);
-    const _dirname = path.dirname(_filename);
-    const envDirname = path.join(_dirname, '../','reservas.env');
     dotenv.config({path: envPath});
     const PORT = process.env.PORT;
     app.listen(PORT,()=>{
@@ -28,5 +22,5 @@ try{
 
 process.on('SIGABRT',async()=>{
     await dbConfig.disconnect(),
-    await process.exit(0);
+    process.exit(0);
 });

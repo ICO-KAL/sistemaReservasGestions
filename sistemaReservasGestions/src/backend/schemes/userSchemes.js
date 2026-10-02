@@ -1,5 +1,4 @@
-import dbClient from '../config/dbConfig.js';
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 
 const userSchemes = new mongoose.Schema({
     usuario: {

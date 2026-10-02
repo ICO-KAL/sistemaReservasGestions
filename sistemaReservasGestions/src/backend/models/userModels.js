@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import userSchemes from '../schemes/userSchemes';
+import userSchemes from '../schemes/userSchemes.js';
 
    const createUser = async (user) =>{
        return await userSchemes.create(user);

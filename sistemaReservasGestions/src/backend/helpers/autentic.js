@@ -1,5 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import 'dotenv/config';
+import process from 'node:process';
 
 export async function autentic(email){
     try{
@@ -19,7 +20,7 @@ export async function verificToken(req,res,next){
         console.log(verificar.email); // mostrarlo por consola 
         next();
     }
-    catch(e){
+    catch{
         res.status(401).json({message: "token no autentico"});
     }
 }

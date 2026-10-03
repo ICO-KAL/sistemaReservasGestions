@@ -11,8 +11,7 @@ export default new class pagosController {
             if (!mongoose.isValidObjectId(reserva)) return res.status(400).json({ message: 'Reserva inválida' });
             if (monto === undefined || !metodo) return res.status(400).json({ message: 'Monto y método son obligatorios' });
 
-            const reservaExiste = await reservasModels.getOneReservas({ _id: reserva });
-            if (!reservaExiste) return res.status(404).json({ message: 'Reserva no encontrada' });
+            if(!await reservasModels.getOneReservas({ _id: reserva })) return res.status(404).json({ message: 'Reserva no encontrada' });
 
             const pago = await pagosModels.createPago({ reserva, monto, metodo, estado });
             return res.status(201).json({ message: 'Pago creado', data: pago });
@@ -36,8 +35,8 @@ export default new class pagosController {
         try {
             const id = getId(req);
             if (!mongoose.isValidObjectId(id)) return res.status(400).json({ message: 'ID de pago inválido' });
-            const pago = await pagosModels.updatePago(id, req.body);
-            if (!pago) return res.status(404).json({ message: 'Pago no encontrado' });
+            if(!await pagosModels.updatePago(id, req.body)) return res.status(404).json({ message: 'Pago no encontrado' });
+
             return res.status(200).json({ message: 'Pago actualizado', data: pago });
         } catch (error) {
             return res.status(500).json({ message: 'Error al actualizar el pago', error: error.message });
@@ -48,8 +47,7 @@ export default new class pagosController {
         try {
             const id = getId(req);
             if (!mongoose.isValidObjectId(id)) return res.status(400).json({ message: 'ID de pago inválido' });
-            const pago = await pagosModels.deletePago(id);
-            if (!pago) return res.status(404).json({ message: 'Pago no encontrado' });
+            if(!await pagosModels.deletePago(id)) return res.status(404).json({ message: 'Pago no encontrado' });
             return res.status(200).json({ message: 'Pago eliminado', data: pago });
         } catch (error) {
             return res.status(500).json({ message: 'Error al eliminar el pago', error: error.message });

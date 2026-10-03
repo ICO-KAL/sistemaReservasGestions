@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 //import 'dotenv/config';
 import mongoose from 'mongoose';
 import path from 'path';
+import process from 'node:process';
 
 export default new class conection{
     constructor(){
@@ -19,9 +20,7 @@ export default new class conection{
     }
     async reservasExit(){
         try{
-           this.disconnect = await mongoose.disconnect();
-           console.log('base de datos desconectada');
-           return this.disconnect;
+           return await mongoose.disconnect(),'base de datos desconectada';
         }
         catch(e){
             console.log(e);

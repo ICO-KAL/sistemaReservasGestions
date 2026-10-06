@@ -38,15 +38,13 @@ export default new class UserController {
 
             const normalizedEmail = email.trim().toLowerCase();
             const user = await userModels.getUserOne({ email: normalizedEmail });
+            
             if (!user || !user.isActive) {
                 return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
             }
 
-            const passwordMatches = await bcrypt.compare(password, user.password);
-            if (!passwordMatches) {
-                return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
-            }
-
+            if (!await bcrypt.compare(password, user.password)) return res.status(401).json({ message: 'Correo o contraseña incorrectos.' });
+            
             const token = await autentic(user.email);
             if (!token) {
                 return res.status(500).json({ message: 'No se pudo iniciar sesión.' });

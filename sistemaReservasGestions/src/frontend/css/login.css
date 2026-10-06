@@ -276,6 +276,76 @@
   font-weight: 700;
 }
 
+.registration-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(calc(100% - 48px), 460px);
+  max-height: min(90vh, 760px);
+  margin: auto;
+  padding: 44px clamp(26px, 7vw, 54px) 34px;
+  overflow-y: auto;
+  color: #242822;
+  background:
+    linear-gradient(135deg, rgba(245, 248, 239, 0.72), transparent 42%),
+    #fff;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  box-shadow: 0 28px 90px rgba(8, 12, 7, 0.3);
+  box-sizing: border-box;
+  transform-origin: center;
+}
+
+.registration-dialog::backdrop {
+  background: rgba(22, 27, 20, 0.58);
+  backdrop-filter: blur(5px);
+  animation: registration-backdrop-in 900ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.registration-dialog.is-closing {
+  pointer-events: none;
+}
+
+.registration-dialog.is-closing::backdrop {
+  animation: registration-backdrop-out 900ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.registration-dialog .form-heading {
+  padding-right: 20px;
+  margin-bottom: 26px;
+}
+
+.registration-dialog .login-form {
+  gap: 16px;
+}
+
+.registration-dialog .mode-switch {
+  margin-top: 20px;
+}
+
+.registration-close {
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: #596052;
+  background: #f2f4ed;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+  place-items: center;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.registration-close:hover {
+  color: #20241f;
+  background: #e6eadf;
+}
+
 @keyframes panel-enter {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -284,6 +354,15 @@
 @keyframes copy-enter {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes registration-backdrop-in {
+  from { background: rgba(22, 27, 20, 0); backdrop-filter: blur(0); }
+  to { background: rgba(22, 27, 20, 0.58); backdrop-filter: blur(5px); }
+}
+
+@keyframes registration-backdrop-out {
+  to { background: rgba(22, 27, 20, 0); backdrop-filter: blur(0); }
 }
 
 @media (max-width: 760px) {
@@ -325,6 +404,11 @@
   .login-panel {
     padding: 32px 24px;
   }
+
+  .registration-dialog {
+    width: calc(100% - 32px);
+    padding: 42px 22px 28px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -335,5 +419,10 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .registration-dialog::backdrop,
+  .registration-dialog.is-closing::backdrop {
+    animation-duration: 550ms !important;
   }
 }

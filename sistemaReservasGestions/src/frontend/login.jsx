@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './css/login.css';
 
-export default function Login() {
+export default function Login({ onAuthenticated }) {
     const [isRegistering, setIsRegistering] = useState(false);
     const [isClosingRegistration, setIsClosingRegistration] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -94,7 +94,7 @@ export default function Login() {
             } else {
                 sessionStorage.setItem('token', result.token);
                 setIsError(false);
-                setMessage('Sesión iniciada correctamente.');
+                onAuthenticated();
             }
         } catch (error) {
             setIsError(true);
